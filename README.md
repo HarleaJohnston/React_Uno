@@ -1,2 +1,2 @@
 # React_Uno
-reworking this Uno game into a react app
+Reworking the Uno game made by CompSciLaurn found at https://github.com/CompSciLauren/uno.git into an React.js App
