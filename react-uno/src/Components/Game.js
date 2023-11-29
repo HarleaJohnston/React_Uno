@@ -3,7 +3,7 @@ import {botNames} from './BotNames'
 
 function Game() {
 	const [players, setPlayers] = useState([])
-	const [playerAmount, setPlayerAmount] = useState()
+	const [playerAmount, setPlayerAmount] = useState(4)
 	const [initialCards, setInitialCards] = useState(7)
 	const [gameTurn, setGameTurn] = useState(0)
 	const [isClockwise, setIsClockwise] = useState(true)

@@ -1,38 +1,144 @@
-.App {
-  text-align: center;
+@import "../src/index.scss";
+
+.form-size {
+  width: 50%;
+  margin: auto;
+  font-size: 2rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#drawCardPile {
+  overflow: visible;
+  width: 500px;
+  height: 178px;
+  margin-left: -192px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#drawCardPile > .card {
+  margin-top: -7px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.drawCardContainer {
+  display: inline-block;
+}
+
+.activePlayer {
+  font-weight: bold;
+  color: #000;
+}
+
+.wildStyle {
+  height: 100vh;
+}
+
+body {
+  //Change background Image
+  // background: url(retina_wood.png);
+
+  
+  //temp color
+  background-color: #323232;
+}
+
+.my-card {
+  position: relative;
+  top: 0;
+  transition: top 0.5s ease, margin-right 0.5s, margin-left 0.5s;
+  transition-delay: 0.1s;
+}
+
+.my-card:hover {
+  cursor: pointer;
+  top: -20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.sideHand > .card {
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: -110px;
+  width: 140px;
+  height: 100px;
+}
+
+h3 {
+  font-weight: normal;
+  color: gray;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.center-card-hands {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.unoButton {
+  animation-name: unoButtonInvalid;
+  animation-duration: 0.5s;
+}
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%;
+  height: 100%;
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+#text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
   color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
 }
 
-.App-link {
-  color: #61dafb;
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.size {
+  width: 5vw;
+  height: 5vw;
+  box-shadow: 2px 2px 3px black;
+  margin: 2rem;
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.red-circle {
+  background-color: $redCard;
+  border-radius: 50%;
+  border: 2px solid $CardBackground;
+}
+
+.blue-circle {
+  background-color: $blueCard;
+  border-radius: 50%;
+  border: 2px solid $CardBackground;
+}
+
+.yellow-circle {
+  background-color: $yellowCard;
+  border-radius: 50%;
+  border: 2px solid $CardBackground;
+}
+
+.green-circle {
+  background-color: $greenCard;
+  border-radius: 50%;
+  border: 2px solid $CardBackground;
 }

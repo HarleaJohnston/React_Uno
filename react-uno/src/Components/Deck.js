@@ -245,7 +245,7 @@ export function Deck(divId, hidden) {
     };
 
     this.cardInvalid = function (card) {
-        let audio = new Audio("error.mp3");
+        let audio = new Audio("../../public/Audio/error.mp3");
         if (players[gameTurn].isBot == false) audio.play();
         players[gameTurn].playerDeck.hand.childNodes[card].classList.add("invalid");
         setTimeout(function () {

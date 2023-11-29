@@ -14,41 +14,39 @@ export function Player(deck, id, index, bot, unoCall) {
 	this.playerIndex = index;
 	this.playerUnoCall = unoCall;
 	this.botLogic = function () {
-	  let numBotCards = this.playerDeck.amtCards;
-  
-	  // bot behavior
-	  for (let i = 0; i < numBotCards; i++) {
-		if (players[gameTurn].playerDeck.isValid(i)) {
-		  if (players[gameTurn].playerDeck.amtCards == 2) {
-			players[gameTurn].unoCall = true;
-		  }
-		  players[gameTurn].playerDeck.playCard(i);
-		  return;
+		let numBotCards = this.playerDeck.amtCards;
+
+		// bot behavior
+		for (let i = 0; i < numBotCards; i++) {
+			if (players[gameTurn].playerDeck.isValid(i)) {
+				if (players[gameTurn].playerDeck.amtCards == 2) {
+					players[gameTurn].unoCall = true;
+				}
+				players[gameTurn].playerDeck.playCard(i);
+				return;
+			}
 		}
-	  }
-  
-	  if (drawStack.stackAmt != 0) {
-		drawACard();
-	  } else {
-		// draw a card and check if it is a match. Will break loop if hits 20 card limit (prevents infinite decks)
-		while (!this.playerDeck.playCard(this.playerDeck.amtCards - 1)) {
-		  drawACard();
+
+		if (drawStack.stackAmt != 0) {
+			drawACard();
+		} else {
+			// draw a card and check if it is a match. Will break loop if hits 20 card limit (prevents infinite decks)
+			while (!this.playerDeck.playCard(this.playerDeck.amtCards - 1)) {
+				drawACard();
+			}
 		}
-	  }
 	};
-  }
-  
-  /**
-   * End current player's turn and begin next player's turn
-   */
-export  function rotatePlayers() {
+}
+
+/**
+ * End current player's turn and begin next player's turn
+ */
+export function rotatePlayers() {
 	gameTurn = gameTurn + gameDirection;
-  
+
 	if (gameTurn == players.length) {
-	  gameTurn = 0;
+		gameTurn = 0;
+	} else if (gameTurn < 0) {
+		gameTurn = players.length - 1;
 	}
-	else if (gameTurn < 0) {
-	  gameTurn = players.length - 1;
-	}
-  }
-  
+}
