@@ -1,6 +1,9 @@
-import { play } from "./Players";
+import { play, rotatePlayers } from "./Players";
 import { Card } from "./Cards";
-import { drawCardAnimation } from "./addCSSToCards";
+import { drawCardAnimation, addCSSDesignToCard, addCSSDesignToBackOfCard } from "./addCSSToCards";
+import { discard } from "./Cards";
+import { cardDraw2, cardReverse, cardSkip, cardWild, cardDraw4 } from "./SpecialCards";
+
 /**
  * deck constructor
  * @param {*} divId
@@ -45,7 +48,7 @@ export function Deck(divId, hidden) {
     /**
      * Give player a random card
      */
-    this.drawCard = function (initialDraw, players) {
+    this.drawCard = function (initialDraw, players, gameTurn) {
         let colorArray = ["Red", "Green", "Blue", "Yellow", "Special"];
         let randColor = colorArray[Math.floor(Math.random() * colorArray.length)];
         let randValue = Math.floor(Math.random() * 13);
@@ -84,7 +87,7 @@ export function Deck(divId, hidden) {
     /**
      * Remove card from hand and reload hand (post-validation of good move)
      */
-    this.playCard = function (players, gameTurn, card) {
+    this.playCard = function (players, gameTurn, card, discardPile) {
         let wildColorMenuIsInactive = true;
         if (this.isValid(card)) {
             // check if second to last card & Uno call protection
@@ -133,7 +136,7 @@ export function Deck(divId, hidden) {
             this.removeCard(card);
             if (this.cards.length == 0) {
                 alert(players[gameTurn].playerID + " wins!");
-                location.reload();
+                // location.reload();
                 return;
             }
         } else if (!players[gameTurn].isBot) {
@@ -161,7 +164,7 @@ export function Deck(divId, hidden) {
     /**
      * Reload the player hand to have the most recent cards in player hand
      */
-    this.reloadHand = function () {
+    this.reloadHand = function (discardPile) {
         this.hand.innerHTML = "";
         for (let i = 0; i < this.amtCards; i++) {
             let cardDiv = document.createElement("div");
@@ -219,7 +222,7 @@ export function Deck(divId, hidden) {
     };
 
     // compare selected card to playfield card
-    this.isValid = function (card) {
+    this.isValid = function (card, discardPile, drawStack) {
         //Get in the value by element ID
         let cardColor = this.cards[card].color;
         let cardNumber = this.cards[card].value;
@@ -247,7 +250,7 @@ export function Deck(divId, hidden) {
         return false;
     };
 
-    this.cardInvalid = function (players, card) {
+    this.cardInvalid = function (players, gameTurn, card) {
         let audio = new Audio("../../public/Audio/error.mp3");
         // if (players[gameTurn].isBot == false) audio.play();
         players[gameTurn].playerDeck.hand.childNodes[card].classList.add("invalid");

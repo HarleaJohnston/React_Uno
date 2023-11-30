@@ -1,8 +1,10 @@
+import { rotatePlayers, play } from "./Players";
+import $ from 'jquery';
 /**
  * Reverse the direction of player rotation
  */
 //Change out any document.getElementById to the react way
-export function cardReverse() {
+export function cardReverse(players, gameDirection) {
 	if (players.length == 2) {
 		rotatePlayers();
 	} else {
@@ -17,7 +19,7 @@ export function cardSkip() {
 	rotatePlayers();
 }
 
-export function cardWild() {
+export function cardWild(players, gameTurn, discardPile) {
 	if (players[gameTurn].isBot) {
 		let colorArray = ["Red", "Green", "Blue", "Yellow"];
 		let randColor = colorArray[Math.floor(Math.random() * colorArray.length)];
@@ -30,7 +32,7 @@ export function cardWild() {
 	return true;
 }
 
-export function selectWildColor(color) {
+export function selectWildColor(color, discardPile, isColorSelected) {
 	discardPile.cards[discardPile.cards.length - 1].color = color;
 	$(".chosen-wild-card-color .inner").css(
 		"background",
@@ -42,14 +44,14 @@ export function selectWildColor(color) {
 	document.getElementById("overlay").style.display = "none";
 }
 
-export function cardDraw2() {
+export function cardDraw2(drawStack) {
 	drawStack.stackAmt++;
 	drawStack.cardType = 2;
 	drawStack.cardValue = 10;
 	drawStack.updateStack();
 }
 
-export function cardDraw4() {
+export function cardDraw4(drawStack) {
 	drawStack.stackAmt++;
 	drawStack.cardType = 4;
 	drawStack.cardValue = 1;

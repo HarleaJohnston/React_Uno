@@ -32,7 +32,7 @@ function Game() {
 	});
 
 	let discardPile = new Deck("discardDeckDiv", false);
-	
+
 	// store how many +2, or +4s are stacked
 	let drawStack = {
 		cardValue: 0,

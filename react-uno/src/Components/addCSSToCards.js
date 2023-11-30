@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * Adds classes to create the CSS design for the back of the Uno cards
  * @param {*} cardDiv
