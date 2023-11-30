@@ -1,3 +1,5 @@
+import {drawACard, drawStack, gameDirection} from "./Deck";
+import {gameTurn, players} from "./Game";
 /**
  * Player constructor
  * @param {*} deck
