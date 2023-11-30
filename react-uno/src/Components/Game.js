@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { botNames } from "./BotNames";
+import { Link } from "react-router-dom";
 
 function Game() {
 	const [players, setPlayers] = useState([]);
@@ -46,13 +47,12 @@ function Game() {
 						</button>
 					</div>
 					<div className="form-group mt-5">
-						<button
+						<Link
 							className="btn btn-primary center-block"
-							type="button"
-							onclick="window.open('rules.html','_self')"
+							to={'/rules'}
 						>
 							<h1>Rules & Info</h1>
-						</button>
+						</Link>
 					</div>
 				</form>
 			</div>
