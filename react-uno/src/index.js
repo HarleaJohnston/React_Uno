@@ -1,21 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Game from "./Components/Game";
 import Rules from "./Components/Rules";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/game",
+    element: <Game />,
+  },
+  {
+    path: "/rules",
+    element: <Rules />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/game" element={<Game />} />
-        <Route path="/rules" element={<Rules />} />
-      </Routes>
-    </Router>
+    <RouterProvider router={router} />;
   </React.StrictMode>
 );
 
