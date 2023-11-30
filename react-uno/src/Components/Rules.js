@@ -30,8 +30,8 @@ const Rules = () => {
 				</ul>
 			</div>
 			{/* style="text-align:center" */}
-			<div class="form-group mt-5 rulesBtn">
-				<Link class="btn btn-primary center-block" to={"/"}>
+			<div className="form-group mt-5 rulesBtn">
+				<Link className="btn btn-primary center-block" to={"/"}>
 					<h2>Return to Main Menu</h2>
 				</Link>
 			</div>
