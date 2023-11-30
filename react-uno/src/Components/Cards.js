@@ -26,14 +26,14 @@ export function Card(color, value) {
 /**
  * Function draws a specific card for cheat
  */
-export function drawSpecificCard(cardColor, cardValue) {
+export function drawSpecificCard(players, cardColor, cardValue) {
 	players[gameTurn].playerDeck.drawSpecificCard(cardColor, cardValue);
 }
 
 /**
  * Function draws a specific card for cheat code
  */
-export function removeManyCards(numberOfCards) {
+export function removeManyCards(players, gameTurn, numberOfCards) {
 	if (numberOfCards > players[gameTurn].playerDeck.amtCards - 2) {
 		return;
 	}
