@@ -1,5 +1,6 @@
 import { rotatePlayers, play } from "./Players";
 import $ from 'jquery';
+
 /**
  * Reverse the direction of player rotation
  */
