@@ -1,28 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { botNames } from "./BotNames";
 import { Link } from "react-router-dom";
-import { Deck } from "./Deck"
-import { play, Player } from "./Players"
-import $ from 'jquery';
-import {
-	drawSpecificCard,
-	removeManyCards,
-	drawACard,
-	selectPlayfieldCard,
-	discard,
-	forcePlay,
-	Card,
-} from "./Cards";
+import { Deck } from "./Deck";
+import { play, Player } from "./Players";
+import $ from "jquery";
+import { selectPlayfieldCard } from "./Cards";
+import GlobalVars from "./GlobalVars";
 
 function Game() {
-	const [players, setPlayers] = useState([]);
 	const [playerName, setPlayerName] = useState("TheLegend27");
 	const [playerAmount, setPlayerAmount] = useState(2);
-	const [initialCards, setInitialCards] = useState(7);
-	const [gameTurn, setGameTurn] = useState(0);
-	// let gameDirection = 1; v
-	const [isClockwise, setIsClockwise] = useState(true);
-	const [isInitialDraw, setIsInitialDraw] = useState(true);
+
+	const players = Global.players
+	const initialCards = Global.initialCards
+	const gameTurn = Global.gameTurn
 
 	// Might have to change this
 	$(document).ready(function () {
@@ -32,21 +23,7 @@ function Game() {
 		});
 	});
 
-	let discardPile = new Deck("discardDeckDiv", false);
-
-	// store how many +2, or +4s are stacked
-	let drawStack = {
-		cardValue: 0,
-		stackAmt: 0,
-		cardType: 2, // either 2 or 4
-		updateStack: function () {
-			document.getElementById("drawCardPile").innerHTML =
-				"+" + this.cardType * this.stackAmt;
-		},
-		clearVisual: function () {
-			document.getElementById("drawCardPile").innerHTML = "";
-		},
-	};
+	let discardPile = Global.discardPile
 
 	function initializePlayers(bNames) {
 		// fill the players array with 2-4 people or bots (future; currently only allows two players)
