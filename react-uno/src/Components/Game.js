@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { botNames } from "./BotNames";
 import { Link } from "react-router-dom";
 import { Deck } from "./Deck"
-import { Player } from "./Players"
+import { play, Player } from "./Players"
 import $ from 'jquery';
 import {
 	drawSpecificCard,
@@ -31,6 +31,8 @@ function Game() {
 		});
 	});
 
+	let discardPile = new Deck("discardDeckDiv", false);
+	
 	// store how many +2, or +4s are stacked
 	let drawStack = {
 		cardValue: 0,
@@ -92,7 +94,7 @@ function Game() {
 
 		setIsInitialDraw(false);
 
-		play();
+		play(players, gameTurn);
 	}
 
 	/**
@@ -121,33 +123,6 @@ function Game() {
 
 		initializeWindow();
 		initializePlayers(botNames);
-	}
-
-	function play() {
-		if (players[gameTurn].isBot) {
-			setTimeout(function () {
-				for (let i = 0; i < players.length; i++) {
-					document
-						.getElementById(players[i].playerDeck.hand.id + "ID")
-						.childNodes[0].classList.remove("activePlayer");
-				}
-				document
-					.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.add("activePlayer");
-				players[gameTurn].botLogic();
-			}, 1000);
-		} else {
-			setTimeout(function () {
-				for (let i = 0; i < players.length; i++) {
-					document
-						.getElementById(players[i].playerDeck.hand.id + "ID")
-						.childNodes[0].classList.remove("activePlayer");
-				}
-				document
-					.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.add("activePlayer");
-			}, 1000);
-		}
 	}
 
 	function callUno() {

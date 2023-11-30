@@ -1,3 +1,6 @@
+import { play } from "./Players";
+import { Card } from "./Cards";
+import { drawCardAnimation } from "./addCSSToCards";
 /**
  * deck constructor
  * @param {*} divId
@@ -42,7 +45,7 @@ export function Deck(divId, hidden) {
     /**
      * Give player a random card
      */
-    this.drawCard = function () {
+    this.drawCard = function (initialDraw, players) {
         let colorArray = ["Red", "Green", "Blue", "Yellow", "Special"];
         let randColor = colorArray[Math.floor(Math.random() * colorArray.length)];
         let randValue = Math.floor(Math.random() * 13);
@@ -81,7 +84,7 @@ export function Deck(divId, hidden) {
     /**
      * Remove card from hand and reload hand (post-validation of good move)
      */
-    this.playCard = function (card) {
+    this.playCard = function (players, gameTurn, card) {
         let wildColorMenuIsInactive = true;
         if (this.isValid(card)) {
             // check if second to last card & Uno call protection
@@ -143,7 +146,7 @@ export function Deck(divId, hidden) {
         this.reloadHand();
         if (wildColorMenuIsInactive == true) {
             rotatePlayers();
-            play();
+            play(players, gameTurn);
         }
         return true;
     };
@@ -244,9 +247,9 @@ export function Deck(divId, hidden) {
         return false;
     };
 
-    this.cardInvalid = function (card) {
+    this.cardInvalid = function (players, card) {
         let audio = new Audio("../../public/Audio/error.mp3");
-        if (players[gameTurn].isBot == false) audio.play();
+        // if (players[gameTurn].isBot == false) audio.play();
         players[gameTurn].playerDeck.hand.childNodes[card].classList.add("invalid");
         setTimeout(function () {
             players[gameTurn].playerDeck.hand.childNodes[card].classList.remove(

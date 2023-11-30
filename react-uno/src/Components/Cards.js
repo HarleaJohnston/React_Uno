@@ -1,3 +1,5 @@
+import { play, rotatePlayers } from "./Players";
+
 /**
  * card constructor
  * @param {*} color
@@ -23,10 +25,12 @@ export function Card(color, value) {
 	};
 }
 
+
+
 /**
  * Function draws a specific card for cheat
  */
-export function drawSpecificCard(players, cardColor, cardValue) {
+export function drawSpecificCard(players, gameTurn, cardColor, cardValue) {
 	players[gameTurn].playerDeck.drawSpecificCard(cardColor, cardValue);
 }
 
@@ -47,7 +51,7 @@ export function removeManyCards(players, gameTurn, numberOfCards) {
 /**
  * Function draws cards and adds them to playerhand
  */
-export function drawACard() {
+export function drawACard(players, drawStack, gameTurn) {
 	if (drawStack.stackAmt != 0) {
 		let drawTimes = drawStack.cardType * drawStack.stackAmt;
 		drawStack.clearVisual();
@@ -57,11 +61,11 @@ export function drawACard() {
 
 		drawStack.stackAmt = 0;
 		rotatePlayers();
-		play();
+		play(players, gameTurn);
 	} else if (forcePlay()) {
 		let audio = new Audio("error.mp3");
 
-		audio.play();
+		// audio.play();
 	} else {
 		players[gameTurn].playerDeck.drawCard();
 	}
@@ -79,12 +83,12 @@ export function selectPlayfieldCard() {
 	discard(tempCard);
 }
 
-export function discard(card) {
+export function discard(card, discardPile) {
 	discardPile.addCard(card);
 	if (discardPile.cards.length > 5) discardPile.removeCard(0);
 }
 
-export function forcePlay() {
+export function forcePlay(players, gameTurn) {
 	for (let i = 0; i < players[gameTurn].playerDeck.cards.length; i++) {
 		if (players[gameTurn].playerDeck.isValid(i)) return true;
 	}

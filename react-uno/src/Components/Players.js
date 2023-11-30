@@ -50,3 +50,30 @@ export function rotatePlayers() {
 		gameTurn = players.length - 1;
 	}
 }
+
+export function play(players, gameTurn) {
+	if (players[gameTurn].isBot) {
+		setTimeout(function () {
+			for (let i = 0; i < players.length; i++) {
+				document
+					.getElementById(players[i].playerDeck.hand.id + "ID")
+					.childNodes[0].classList.remove("activePlayer");
+			}
+			document
+				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
+				.childNodes[0].classList.add("activePlayer");
+			players[gameTurn].botLogic();
+		}, 1000);
+	} else {
+		setTimeout(function () {
+			for (let i = 0; i < players.length; i++) {
+				document
+					.getElementById(players[i].playerDeck.hand.id + "ID")
+					.childNodes[0].classList.remove("activePlayer");
+			}
+			document
+				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
+				.childNodes[0].classList.add("activePlayer");
+		}, 1000);
+	}
+}
