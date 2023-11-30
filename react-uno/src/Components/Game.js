@@ -70,7 +70,9 @@ function Game() {
 			}
 		}
 
-		setIsInitialDraw(false);
+		Global.isInitialDraw = false
+		Global.playerName = playerName;
+		Global.playerAmount = playerAmount;
 
 		play(players, gameTurn);
 	}
@@ -86,6 +88,7 @@ function Game() {
 	}
 
 	function startGame() {
+		
 		let playerNameInput = document.getElementById("playerName");
 		let playerName = playerNameInput.value;
 		playerNameInput.classList.remove("is-valid");
@@ -148,7 +151,7 @@ function Game() {
 						<button
 							className="btn btn-primary center-block"
 							type="button"
-							onclick={() => startGame()}
+							onclick={() => {startGame()}}
 						>
 							<h1>New Game</h1>
 						</button>

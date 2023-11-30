@@ -1,3 +1,5 @@
+import { Deck } from "./Deck";
+
 const GlobalVars = () => {};
 
 export default GlobalVars;
