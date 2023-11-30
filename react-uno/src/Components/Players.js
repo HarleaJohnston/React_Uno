@@ -1,60 +1,55 @@
-import {drawACard, drawStack, gameDirection} from "./Deck";
-import {gameTurn, players} from "./Game";
-/**
- * Player constructor
- * @param {*} deck
- * @param {*} id
- * @param {*} index
- * @param {*} bot
- * @param {*} unoCall
- */
-//Potentially move to component?
-export function Player(deck, id, index, bot, unoCall) {
-	this.isBot = bot;
-	this.playerDeck = deck;
-	this.playerID = id;
-	this.playerIndex = index;
-	this.playerUnoCall = unoCall;
-	this.botLogic = function () {
-		let numBotCards = this.playerDeck.amtCards;
+import React, { useState } from 'react';
+import { drawACard, drawStack, gameDirection } from './Deck';
+import { gameTurn, players, rotatePlayers } from './Game';
 
-		// bot behavior
-		for (let i = 0; i < numBotCards; i++) {
-			if (players[gameTurn].playerDeck.isValid(i)) {
-				if (players[gameTurn].playerDeck.amtCards == 2) {
-					players[gameTurn].unoCall = true;
-				}
-				players[gameTurn].playerDeck.playCard(i);
-				return;
-			}
-		}
+export function Players() {
+  const [gameState, setGameState] = useState({
+    players,
+    gameTurn,
+    drawStack,
+  });
 
-		if (drawStack.stackAmt != 0) {
-			drawACard();
-		} else {
-			// draw a card and check if it is a match. Will break loop if hits 20 card limit (prevents infinite decks)
-			while (!this.playerDeck.playCard(this.playerDeck.amtCards - 1)) {
-				drawACard();
-			}
-		}
-	};
-}
+  const handleBotLogic = () => {
+    let numBotCards = gameState.players[gameState.gameTurn].playerDeck.amtCards;
 
-/**
- * End current player's turn and begin next player's turn
- */
-export function rotatePlayers() {
-	gameTurn = gameTurn + gameDirection;
+    for (let i = 0; i < numBotCards; i++) {
+      if (gameState.players[gameState.gameTurn].playerDeck.isValid(i)) {
+        if (gameState.players[gameState.gameTurn].playerDeck.amtCards === 2) {
+          gameState.players[gameState.gameTurn].unoCall = true;
+        }
+        gameState.players[gameState.gameTurn].playerDeck.playCard(i);
+        setGameState((prev) => ({ ...prev }));
+        return;
+      }
+    }
 
-	if (gameTurn == players.length) {
-		gameTurn = 0;
-	} else if (gameTurn < 0) {
-		gameTurn = players.length - 1;
-	}
+    if (gameState.drawStack.stackAmt !== 0) {
+      drawACard();
+    } else {
+      while (
+        !gameState.players[gameState.gameTurn].playerDeck.playCard(
+          gameState.players[gameState.gameTurn].playerDeck.amtCards - 1
+        )
+      ) {
+        drawACard();
+      }
+    }
+
+    setGameState((prev) => ({ ...prev }));
+  };
+
+  const handleRotatePlayers = () => {
+    rotatePlayers();
+    setGameState((prev) => ({
+      ...prev,
+      gameTurn,
+    }));
+  };
+
 }
 
 // not originally here from index.js(game.js)
-export function play(players, gameTurn) {
+/* export function play(players, gameTurn) {
 	if (players[gameTurn].isBot) {
 		setTimeout(function () {
 			for (let i = 0; i < players.length; i++) {
@@ -79,4 +74,4 @@ export function play(players, gameTurn) {
 				.childNodes[0].classList.add("activePlayer");
 		}, 1000);
 	}
-}
+} */ 
