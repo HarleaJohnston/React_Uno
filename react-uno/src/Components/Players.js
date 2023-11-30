@@ -53,6 +53,7 @@ export function rotatePlayers() {
 	}
 }
 
+// not originally here from index.js(game.js)
 export function play(players, gameTurn) {
 	if (players[gameTurn].isBot) {
 		setTimeout(function () {

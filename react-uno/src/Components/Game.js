@@ -20,6 +20,7 @@ function Game() {
 	const [playerAmount, setPlayerAmount] = useState(2);
 	const [initialCards, setInitialCards] = useState(7);
 	const [gameTurn, setGameTurn] = useState(0);
+	// let gameDirection = 1; v
 	const [isClockwise, setIsClockwise] = useState(true);
 	const [isInitialDraw, setIsInitialDraw] = useState(true);
 
