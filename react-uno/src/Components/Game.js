@@ -5,7 +5,7 @@ import { Deck } from "./Deck";
 import { play, Player } from "./Players";
 import $ from "jquery";
 import { selectPlayfieldCard } from "./Cards";
-import GlobalVars from "./GlobalVars";
+import Global from "./GlobalVars";
 
 function Game() {
 	const [playerName, setPlayerName] = useState("TheLegend27");
