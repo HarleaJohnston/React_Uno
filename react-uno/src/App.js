@@ -7,10 +7,6 @@ import Global from "./Components/GlobalVars";
 function App() {
 	const [playerName, setPlayerName] = useState("TheLegend27");
 	const [playerAmount, setPlayerAmount] = useState(2);
-
-	const players = Global.players;
-	const initialCards = Global.initialCards;
-	const gameTurn = Global.gameTurn;
 	return (
 		<>
 			<div id="setupGame" className="container">
