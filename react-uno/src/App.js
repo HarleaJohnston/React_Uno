@@ -40,15 +40,9 @@ function App() {
 						</select>
 					</div>
 					<div className="form-group mt-5">
-						<button
-							className="btn btn-primary center-block"
-							type="button"
-							onclick={() => {
-								startGame();
-							}}
-						>
+						<Link className="btn btn-primary center-block" to={"/game"}>
 							<h1>New Game</h1>
-						</button>
+						</Link>
 					</div>
 					<div className="form-group mt-5">
 						<Link className="btn btn-primary center-block" to={"/rules"}>
@@ -56,86 +50,6 @@ function App() {
 						</Link>
 					</div>
 				</form>
-			</div>
-			<div id="playingField" className="container mt-5 d-none">
-				<div className="row">
-					<div className="col center-card-hands" align="center">
-						<div id="TopSeatID"></div>
-						<div id="TopSeat"></div>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="col-md-2">
-						<div id="LeftSeatID"></div>
-						<div id="LeftSeat" className="sideHand"></div>
-					</div>
-					<div className="col-md-8 center-card-hands" align="center">
-						{/* style={"padding-top: 50px; padding-bottom: 50px"} */}
-						<div className="row">
-							{/* style={"padding-right: 200px"} */}
-							<div className="col">
-								<div className="drawDeckOnPlayfield black">
-									<div id="drawCardPile"></div>
-								</div>
-							</div>
-
-							<div className="col">
-								<br />
-								<div id="unoButton">
-									<button
-										className="btn btn-primary center-block"
-										type="button"
-										onclick="callUno()"
-									>
-										<h2>Call Uno!</h2>
-									</button>
-								</div>
-							</div>
-						</div>
-						<div className="row">
-							<div id="discardDeckDiv"></div>
-							<div id="playfieldHand"></div>
-						</div>
-					</div>
-					<div className="col-md-2">
-						<div id="RightSeatID"></div>
-						<div id="RightSeat" className="sideHand"></div>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="col center-card-hands" align="center">
-						<div id="BottomSeatID"></div>
-						<div id="BottomSeat"></div>
-						<div id="player1Hand"></div>
-					</div>
-				</div>
-
-				<div id="wildColor"></div>
-				<div id="overlay">
-					<div id="text">
-						<center>Choose a color!</center>
-						<div className="main-container">
-							<div
-								className="size red-circle"
-								onclick="selectWildColor('Red')"
-							></div>
-							<div
-								className="size blue-circle"
-								onclick="selectWildColor('Blue')"
-							></div>
-							<div
-								className="size yellow-circle"
-								onclick="selectWildColor('Yellow')"
-							></div>
-							<div
-								className="size green-circle"
-								onclick="selectWildColor('Green')"
-							></div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</>
 	);

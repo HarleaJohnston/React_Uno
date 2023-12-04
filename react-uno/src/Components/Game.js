@@ -10,20 +10,28 @@ import Global from "./GlobalVars";
 export function Game() {
 	const [playerName, setPlayerName] = useState("TheLegend27");
 	const [playerAmount, setPlayerAmount] = useState(2);
+  
+	const players = Global.players;
+	const initialCards = Global.initialCards;
+	const gameTurn = Global.gameTurn;
+	const discardPile = Global.discardPile;
 
-	const players = Global.players
-	const initialCards = Global.initialCards
-	const gameTurn = Global.gameTurn
-
-	// Might have to change this
-	$(document).ready(function () {
-		$(document).on("click", ".my-card", function () {
-			let cardIndex = $(".my-card").index(this);
-			players[gameTurn].playerDeck.playCard(cardIndex);
-		});
-	});
-
-	let discardPile = Global.discardPile
+	useEffect(() => {
+		startGame();
+	  }, []);
+  
+	useEffect(() => {
+	  const handleCardClick = (event) => {
+		let cardIndex = event.currentTarget.dataset.index;
+		players[gameTurn].playerDeck.playCard(cardIndex);
+	  };
+  
+	  $(".my-card").on("click", handleCardClick);
+  
+	  return () => {
+		$(".my-card").off("click", handleCardClick);
+	  };
+	}, [gameTurn, players]);
 
 	function initializePlayers(bNames) {
 		// fill the players array with 2-4 people or bots (future; currently only allows two players)
@@ -142,6 +150,90 @@ export function Game() {
 			}, 1000);
 		}
 	} 
+
+	return(
+		<div id="playingField" className="container mt-5 d-none">
+				<div className="row">
+					<div className="col center-card-hands" align="center">
+						<div id="TopSeatID"></div>
+						<div id="TopSeat"></div>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-2">
+						<div id="LeftSeatID"></div>
+						<div id="LeftSeat" className="sideHand"></div>
+					</div>
+					<div className="col-md-8 center-card-hands" align="center">
+						{/* style={"padding-top: 50px; padding-bottom: 50px"} */}
+						<div className="row">
+							{/* style={"padding-right: 200px"} */}
+							<div className="col">
+								<div className="drawDeckOnPlayfield black">
+									<div id="drawCardPile"></div>
+								</div>
+							</div>
+
+							<div className="col">
+								<br />
+								<div id="unoButton">
+								<button
+									className="btn btn-primary center-block"
+									type="button"
+									onClick={callUno}
+								>
+									<h2>Call Uno!</h2>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div className="row">
+							<div id="discardDeckDiv"></div>
+							<div id="playfieldHand"></div>
+						</div>
+					</div>
+					<div className="col-md-2">
+						<div id="RightSeatID"></div>
+						<div id="RightSeat" className="sideHand"></div>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col center-card-hands" align="center">
+						<div id="BottomSeatID"></div>
+						<div id="BottomSeat"></div>
+						<div id="player1Hand"></div>
+					</div>
+				</div>
+
+				<div id="wildColor"></div>
+				<div id="overlay">
+					<div id="text">
+						<center>Choose a color!</center>
+						<div className="main-container">
+							<div
+								className="size red-circle"
+								onclick="selectWildColor('Red')"
+							></div>
+							<div
+								className="size blue-circle"
+								onclick="selectWildColor('Blue')"
+							></div>
+							<div
+								className="size yellow-circle"
+								onclick="selectWildColor('Yellow')"
+							></div>
+							<div
+								className="size green-circle"
+								onclick="selectWildColor('Green')"
+							></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	)
+
 }
 
 export default Game;
