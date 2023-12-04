@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { drawACard, drawStack, gameDirection } from './Deck';
+import { Deck } from './Deck';
 import { gameTurn, players, rotatePlayers } from './Game';
+
+const drawStack = Deck.drawStack;
+const drawACard = Deck.drawACard;
 
 export function Players() {
   const [gameState, setGameState] = useState({

@@ -1,4 +1,4 @@
-import { rotatePlayers } from "./Players";
+import { Players } from "./Players";
 import { Card } from "./Cards";
 import { drawCardAnimation, addCSSDesignToCard, addCSSDesignToBackOfCard } from "./addCSSToCards";
 import { discard } from "./Cards";
@@ -148,8 +148,8 @@ export function Deck(divId, hidden) {
 
         this.reloadHand();
         if (wildColorMenuIsInactive == true) {
-            rotatePlayers();
-            play(players, gameTurn);
+            Players.rotatePlayers();
+            Players.play(players, gameTurn);
         }
         return true;
     };

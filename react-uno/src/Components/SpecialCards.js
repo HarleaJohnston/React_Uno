@@ -1,4 +1,4 @@
-import { rotatePlayers, play } from "./Players";
+import { Players } from "./Players";
 import $ from 'jquery';
 
 /**
@@ -6,8 +6,8 @@ import $ from 'jquery';
  */
 //Change out any document.getElementById to the react way
 export function cardReverse(players, gameDirection) {
-	if (players.length == 2) {
-		rotatePlayers();
+	if (players.length === 2) {
+		Players.rotatePlayers();
 	} else {
 		gameDirection = -1 * gameDirection;
 	}
@@ -17,7 +17,7 @@ export function cardReverse(players, gameDirection) {
  * Skip the next player in rotation
  */
 export function cardSkip() {
-	rotatePlayers();
+	Players.rotatePlayers();
 }
 
 export function cardWild(players, gameTurn, discardPile) {
@@ -40,8 +40,8 @@ export function selectWildColor(color, discardPile, isColorSelected) {
 		convertColorToHex(color)
 	);
 	isColorSelected = true;
-	rotatePlayers();
-	play();
+	Players.rotatePlayers();
+	Players.play();
 	document.getElementById("overlay").style.display = "none";
 }
 
