@@ -27,44 +27,21 @@ function Player({ deck, id, index, isBot, unoCall }) {
         drawACard();
       }
     }
-
-    setGameState((prev) => ({ ...prev }));
   };
 
-  const handleRotatePlayers = () => {
-    rotatePlayers();
-    setGameState((prev) => ({
-      ...prev,
-      gameTurn,
-    }));
-  };
+	// Assuming these are global variables
+	let gameTurn = 0;
+	let gameDirection = 1;
+	let drawStack = { stackAmt: 0 };
+
+	function rotatePlayers(players) {
+	gameTurn = gameTurn + gameDirection;
+
+	if (gameTurn === players.length) {
+		gameTurn = 0;
+	} else if (gameTurn < 0) {
+		gameTurn = players.length - 1;
+	}
+	}
 
 }
-
-// not originally here from index.js(game.js)
-/* export function play(players, gameTurn) {
-	if (players[gameTurn].isBot) {
-		setTimeout(function () {
-			for (let i = 0; i < players.length; i++) {
-				document
-					.getElementById(players[i].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.remove("activePlayer");
-			}
-			document
-				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-				.childNodes[0].classList.add("activePlayer");
-			players[gameTurn].botLogic();
-		}, 1000);
-	} else {
-		setTimeout(function () {
-			for (let i = 0; i < players.length; i++) {
-				document
-					.getElementById(players[i].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.remove("activePlayer");
-			}
-			document
-				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-				.childNodes[0].classList.add("activePlayer");
-		}, 1000);
-	}
-} */ 
