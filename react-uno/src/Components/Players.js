@@ -1,77 +1,48 @@
-import React, { useState } from 'react';
-import { drawACard, drawStack, gameDirection } from './Deck';
-import { gameTurn, players, rotatePlayers } from './Game';
+import React, { useState, useEffect } from 'react';
+import { drawACard } from './Deck';
 
-export function Players() {
-  const [gameState, setGameState] = useState({
-    players,
-    gameTurn,
-    drawStack,
-  });
+function Player({ deck, id, index, isBot, unoCall }) {
+  const [playerDeck, setPlayerDeck] = useState(deck);
 
-  const handleBotLogic = () => {
-    let numBotCards = gameState.players[gameState.gameTurn].playerDeck.amtCards;
+  const botLogic = () => {
+    let numBotCards = playerDeck.amtCards;
 
+    // Bot behavior
     for (let i = 0; i < numBotCards; i++) {
-      if (gameState.players[gameState.gameTurn].playerDeck.isValid(i)) {
-        if (gameState.players[gameState.gameTurn].playerDeck.amtCards === 2) {
-          gameState.players[gameState.gameTurn].unoCall = true;
+      if (playerDeck.isValid(i)) {
+        if (playerDeck.amtCards === 2) {
+          unoCall(true);
         }
-        gameState.players[gameState.gameTurn].playerDeck.playCard(i);
-        setGameState((prev) => ({ ...prev }));
+        playerDeck.playCard(i);
+        setPlayerDeck({ ...playerDeck });
         return;
       }
     }
 
-    if (gameState.drawStack.stackAmt !== 0) {
+    // Draw a card if the draw stack is not empty
+    if (drawStack.stackAmt !== 0) {
       drawACard();
     } else {
-      while (
-        !gameState.players[gameState.gameTurn].playerDeck.playCard(
-          gameState.players[gameState.gameTurn].playerDeck.amtCards - 1
-        )
-      ) {
+      while (!playerDeck.playCard(playerDeck.amtCards - 1)) {
         drawACard();
       }
     }
-
-    setGameState((prev) => ({ ...prev }));
   };
 
-  const handleRotatePlayers = () => {
-    rotatePlayers();
-    setGameState((prev) => ({
-      ...prev,
-      gameTurn,
-    }));
-  };
+	// Assuming these are global variables
+	let gameTurn = 0;
+	let gameDirection = 1;
+	let drawStack = { stackAmt: 0 };
+
+	function rotatePlayers(players) {
+	gameTurn = gameTurn + gameDirection;
+
+	if (gameTurn === players.length) {
+		gameTurn = 0;
+	} else if (gameTurn < 0) {
+		gameTurn = players.length - 1;
+	}
+	}
 
 }
 
-// not originally here from index.js(game.js)
-/* export function play(players, gameTurn) {
-	if (players[gameTurn].isBot) {
-		setTimeout(function () {
-			for (let i = 0; i < players.length; i++) {
-				document
-					.getElementById(players[i].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.remove("activePlayer");
-			}
-			document
-				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-				.childNodes[0].classList.add("activePlayer");
-			players[gameTurn].botLogic();
-		}, 1000);
-	} else {
-		setTimeout(function () {
-			for (let i = 0; i < players.length; i++) {
-				document
-					.getElementById(players[i].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.remove("activePlayer");
-			}
-			document
-				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-				.childNodes[0].classList.add("activePlayer");
-		}, 1000);
-	}
-} */ 
