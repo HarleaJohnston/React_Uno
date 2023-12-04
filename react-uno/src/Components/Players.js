@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Deck } from './Deck';
-import { gameTurn, players, rotatePlayers } from './Game';
+import { Game } from './Game';
 
 const drawStack = Deck.drawStack;
 const drawACard = Deck.drawACard;
+const players = Game.players;
+const gameTurn = Game.gameTurn;
 
 export function Players() {
   const [gameState, setGameState] = useState({
@@ -48,33 +50,4 @@ export function Players() {
       gameTurn,
     }));
   };
-
 }
-
-// not originally here from index.js(game.js)
-/* export function play(players, gameTurn) {
-	if (players[gameTurn].isBot) {
-		setTimeout(function () {
-			for (let i = 0; i < players.length; i++) {
-				document
-					.getElementById(players[i].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.remove("activePlayer");
-			}
-			document
-				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-				.childNodes[0].classList.add("activePlayer");
-			players[gameTurn].botLogic();
-		}, 1000);
-	} else {
-		setTimeout(function () {
-			for (let i = 0; i < players.length; i++) {
-				document
-					.getElementById(players[i].playerDeck.hand.id + "ID")
-					.childNodes[0].classList.remove("activePlayer");
-			}
-			document
-				.getElementById(players[gameTurn].playerDeck.hand.id + "ID")
-				.childNodes[0].classList.add("activePlayer");
-		}, 1000);
-	}
-} */ 

@@ -1,3 +1,4 @@
+import Game from "./Game";
 import { Players } from "./Players";
 import $ from 'jquery';
 
@@ -41,7 +42,7 @@ export function selectWildColor(color, discardPile, isColorSelected) {
 	);
 	isColorSelected = true;
 	Players.rotatePlayers();
-	Players.play();
+	Game.play();
 	document.getElementById("overlay").style.display = "none";
 }
 
