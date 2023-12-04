@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { botNames } from "./BotNames";
 import { Link } from "react-router-dom";
 import { Deck } from "./Deck";
-import { Player } from "./Players";
+import { Players } from "./Players";
 import $ from "jquery";
 import { selectPlayfieldCard } from "./Cards";
 import Global from "./GlobalVars";
 
-function Game() {
+export function Game() {
 	const [playerName, setPlayerName] = useState("TheLegend27");
 	const [playerAmount, setPlayerAmount] = useState(2);
 
@@ -61,7 +61,7 @@ function Game() {
 			document.getElementById(playerHandLabel).innerHTML =
 				"<h3>" + tempID + "</h3>";
 
-			let tempPlayer = new Player(tempDeck, tempID, tempIndex, isBot, false);
+			let tempPlayer = new Players(tempDeck, tempID, tempIndex, isBot, false);
 
 			players.push(tempPlayer);
 
