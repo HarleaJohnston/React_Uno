@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { drawACard } from './Deck';
+import { Deck } from './Deck';
 
 function Player({ deck, id, index, isBot, unoCall }) {
   const [playerDeck, setPlayerDeck] = useState(deck);
@@ -21,7 +21,7 @@ function Player({ deck, id, index, isBot, unoCall }) {
 
     // Draw a card if the draw stack is not empty
     if (drawStack.stackAmt !== 0) {
-      drawACard();
+      Deck.drawACard();
     } else {
       while (!playerDeck.playCard(playerDeck.amtCards - 1)) {
         drawACard();

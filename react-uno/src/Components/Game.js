@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { botNames } from "./BotNames";
 import { Link } from "react-router-dom";
 import { Deck } from "./Deck";
-import { Players } from "./Players";
+import * as Players from "./Players";
 import $ from "jquery";
 import { selectPlayfieldCard } from "./Cards";
 import Global from "./GlobalVars";

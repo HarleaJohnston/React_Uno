@@ -1,5 +1,5 @@
 import Game from "./Game";
-import { Players } from "./Players";
+import {Players} from "./Players";
 import $ from 'jquery';
 
 /**
