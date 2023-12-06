@@ -32,11 +32,7 @@
 
 body {
 	//Change background Image
-	// background: url(retina_wood.png);
-
-	//temp colors
-	background-color: #323232;
-  color: #e5e5e5;
+	background: url(bg.png) no-repeat center center fixed;
 }
 
 .my-card {
@@ -70,11 +66,59 @@ li {
 	margin-bottom: 5px;
 }
 
+.container,
+.rules {
+	margin-top: 2%;
+	background-color: #714123;
+	color: $txt;
+	width: 40%;
+	padding: 1%;
+	border: 4px solid #925c39;
+	border-radius: 10px;
+	@include button
+}
+
+.center {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+.winCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 100vh;
+	@include button;
+	div{
+		img{
+			margin-bottom: 1%;
+		}
+		h1{
+			margin-bottom: 2%;
+		}
+		background-color: #F7F4F2;
+		padding: 2%;
+		border-radius: 10px;
+		.btn{
+			margin: 1% 5%;
+			background-color: #B6F2F4;
+			color:#000;
+			border: 2px #A5DCDE solid;
+		}
+	}
+}
+
 .center-card-hands {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+#unoButton{
+	@include button;
 }
 
 .unoButton {

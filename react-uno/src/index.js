@@ -7,6 +7,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Game from "./Components/Game";
 import Rules from "./Components/Rules";
+import Win from "./Components/Win";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/rules",
     element: <Rules />,
+  },
+  {
+    path: "/win",
+    element: <Win />,
   },
 ]);
 

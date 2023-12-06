@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Deck } from './Deck';
+import { drawACard } from './Cards';
 
-function Player({ deck, id, index, isBot, unoCall }) {
+export function Players({ deck, id, index, isBot, unoCall }) {
   const [playerDeck, setPlayerDeck] = useState(deck);
 
   const botLogic = () => {

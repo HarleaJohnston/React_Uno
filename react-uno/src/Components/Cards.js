@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import Global from "./GlobalVars";
 
 export function Card(color, value) {
   this.color = color;
@@ -61,7 +61,7 @@ export function drawACard(
   }
 }
 
-export function selectPlayfieldCard(discard, Card) {
+export function selectPlayfieldCard(discards, Card) {
   let colorArray = ['Red', 'Green', 'Blue', 'Yellow'];
   let randColor = colorArray[Math.floor(Math.random() * colorArray.length)];
   let randValue = Math.floor(Math.random() * 10);
@@ -71,8 +71,8 @@ export function selectPlayfieldCard(discard, Card) {
 }
 
 export function discard(card, discardPile) {
-  discardPile.addCard(card);
-  if (discardPile.cards.length > 5) discardPile.removeCard(0);
+  Global.discardPile .addCard(card);
+  if (Global.discardPile .cards.length > 5) discardPile.removeCard(0);
 }
 
 export function forcePlay(players, gameTurn) {

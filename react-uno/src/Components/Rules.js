@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const Rules = () => {
 	return (
+		<div className="center">
 		<div className="rules">
 			<h1>
-				<center>Rule and Information</center>
+				<center>Rules and Information</center>
 			</h1>
-			{/* style="width: 75%; font-size: 24px" */}
 			<div>
 				<ul>
 					<li>This is a modified version of the game of Uno.</li>
@@ -35,6 +35,7 @@ const Rules = () => {
 					<h2>Return to Main Menu</h2>
 				</Link>
 			</div>
+		</div>
 		</div>
 	);
 };
